@@ -5,7 +5,10 @@ module OhlohScm::Adapters
 		# and return an appropriate adapter.
 		def self.from_path(path)
 
-			if FileTest.exist?(File.join(path, '.git'))
+			if FileTest.exist?(File.join(path, '.fslckout'))
+				FossilAdapter.new(:url => File.expand_path(path)).normalize
+
+			elsif FileTest.exist?(File.join(path, '.git'))
 				GitAdapter.new(:url => File.expand_path(path)).normalize
 
 			elsif FileTest.exist?(File.join(path, '.hg'))

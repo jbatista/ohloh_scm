@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["BlackDuck Software"]
   gem.email         = ["info@openhub.net"]
   gem.summary       = %[Source Control Management]
-  gem.description   = %[The Ohloh source control management library for interacting with Git, SVN, CVS, Hg and Bzr repositories.]
+  gem.description   = %[The Ohloh source control management library for interacting with Git, SVN, CVS, Hg, Bzr and Fossil repositories.]
   gem.homepage      = %[https://github.com/blackducksw/ohloh_scm/]
   gem.license       = %[GPL v2.0]
 
