@@ -101,6 +101,10 @@ class OhlohScm::Test < Test::Unit::TestCase
 		end
 	end
 
+    def with_fossil_repository(name, branch_name = nil)
+        with_repository(OhlohScm::Adapters::FossilAdapter, name, branch_name) { |fossil| yield fossil }
+    end
+
   def with_git_repository(name, branch_name = nil)
     with_repository(OhlohScm::Adapters::GitAdapter, name, branch_name) { |git| yield git }
   end
