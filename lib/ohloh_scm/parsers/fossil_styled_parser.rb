@@ -13,8 +13,8 @@ module OhlohScm::Parsers
 		end
 
 		def self.whatchanged
-            # -t checkin -n MAX_OUTPUT_LINES -W LINE_WIDTH -v CHANGES_SUMMARY
-			"fossil timeline -t ci -n 40 -W 0 -v"
+            # after DATETIME -t checkin -n MAX_OUTPUT_LINES -W LINE_WIDTH -v CHANGES_SUMMARY
+			"fossil timeline before now -t ci -n 40 -W 0 -v"
 		end
 
         def self.parse_tstamp(date, time, tzoffset = '+0000')
