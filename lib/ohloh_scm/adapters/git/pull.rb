@@ -22,12 +22,12 @@ module OhlohScm::Adapters
 			unless self.exist? && self.has_branch?
 				run "mkdir -p '#{self.url}'"
 				run "rm -rf '#{self.url}'"
-				run "git clone -q -n '#{source_scm.url}' '#{self.url}' >/dev/null 2>&1"
+				run "git clone -q -n '#{source_scm.url}' '#{self.url}'"
 				create_tracking_branch(source_scm.branch_name) # ensure the correct branch exist locally
 				checkout # switch to the correct branch
 			else
 				checkout # should already be on correct branch, but some old repositories were stricken by a bug
-				run "cd '#{self.url}' && git fetch --update-head-ok '#{source_scm.url}' #{self.branch_name}:#{self.branch_name}"
+				run "cd '#{self.url}' && git fetch --tags --update-head-ok '#{source_scm.url}' #{self.branch_name}:#{self.branch_name}"
 			end
 			clean_up_disk
 

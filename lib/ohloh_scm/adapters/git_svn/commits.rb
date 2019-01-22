@@ -1,8 +1,15 @@
 module OhlohScm::Adapters
   class GitSvnAdapter < AbstractAdapter
     def commit_count(opts={})
-      cmd = "#{after_revision(opts)} | wc -l"
-      git_svn_log(cmd: cmd, oneline: true).to_i
+      cmd = "#{after_revision(opts)} | grep -E -e '^r[0-9]+.*lines$' | wc -l"
+      git_svn_log(cmd: cmd, oneline: false).to_i
+    end
+
+    def source_scm_commit_count(opts={})
+      options = username_and_password_opts(opts[:source_scm])
+      svn_log = run("#{accept_ssl_certificate_cmd} svn info #{options} '#{opts[:source_scm].url}'")
+      svn_log.match(/Revision: ([\d]*)/)
+      $1.to_i - opts[:after].to_i
     end
 
     def commits(opts={})
